@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trackify AI - Track Smarter. Buy Better.</title>
+  <meta name="description" content="Trackify AI - Premium AI-powered product tracking and smart alerts.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-theme="light">
+  
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="mesh-bg"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <i data-lucide="crosshair" class="text-gradient-primary"></i>
+      <span>Trackify<span style="font-weight: 300;">AI</span></span>
+    </div>
+    
+    <div class="nav-links" id="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    
+    <div id="auth-container" style="display: flex; gap: 1rem; align-items: center;">
+      <button id="themeToggle" class="theme-toggle">
+        <i data-lucide="sun" width="18"></i>
+      </button>
+      <a href="login.html" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Login</a>
+      <a href="register.html" class="btn btn-primary" style="padding: 0.5rem 1rem;">Get Started</a>
+      <button id="mobile-menu-toggle" class="mobile-menu-btn">
+        <i data-lucide="menu" width="24"></i>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero container">
+      <div class="hero-pill fade-up">
+        <span class="badge badge-success" style="padding: 0.1rem 0.4rem; font-size: 0.7rem;">New</span> 
+        Trackify AI 3.0 is now live
+      </div>
+      <h1 class="fade-up" style="transition-delay: 100ms;">
+        Track Smarter.<br>
+        <span class="text-gradient-primary">Buy Better.</span>
+      </h1>
+      <p class="fade-up" style="transition-delay: 200ms;">
+        The intelligent product tracker that monitors global prices, predicts drops, and alerts you the exact second your target is hit. Never overpay again.
+      </p>
+      
+      <div class="fade-up" style="display: flex; gap: 1rem; transition-delay: 300ms;">
+        <a href="register.html" class="btn btn-glow" style="padding: 1rem 2rem; font-size: 1.1rem;">
+          Get Started Free <i data-lucide="arrow-right" width="18"></i>
+        </a>
+        <a href="#demo" class="btn btn-secondary" style="padding: 1rem 2rem; font-size: 1.1rem;">
+          <i data-lucide="play" width="18"></i> Live Demo
+        </a>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="trust-badges fade-up" style="transition-delay: 400ms;">
+        <p style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Trusted by shoppers tracking on</p>
+        <div class="trust-logos">
+          <!-- Placeholder logos via text to keep it self-contained -->
+          <h3 style="font-family: serif; font-size: 1.5rem;">Amazon</h3>
+          <h3 style="font-family: sans-serif; font-size: 1.5rem; font-style: italic;">eBay</h3>
+          <h3 style="font-family: sans-serif; font-size: 1.5rem; font-weight: 900;">BEST BUY</h3>
+          <h3 style="font-family: serif; font-size: 1.5rem; color: #111;">Walmart<span style="color: #ffc220;">*</span></h3>
+        </div>
+      </div>
+
+      <!-- Dashboard Mockup -->
+      <div class="mockup-wrapper fade-up" style="transition-delay: 500ms; margin-bottom: 4rem;">
+        <div class="dashboard-mockup">
+          <!-- Sidebar -->
+          <div style="width: 220px; border-right: 1px solid var(--border-color); padding: 1.5rem; background: var(--bg-surface);">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem;">
+              <i data-lucide="crosshair" style="color: var(--accent-primary);"></i> <span style="font-weight: 700;">TrackifyAI</span>
+            </div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; padding: 0.5rem; background: var(--bg-panel); border-radius: 8px;">
+              <i data-lucide="search" width="16" style="vertical-align: middle;"></i> Search...
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+              <div style="padding: 0.5rem; border-radius: 6px; background: rgba(94,106,210,0.1); color: var(--text-primary); font-size: 0.9rem;">Dashboard</div>
+              <div style="padding: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">Wishlist</div>
+              <div style="padding: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">Alerts</div>
+            </div>
+          </div>
+          <!-- Main Area -->
+          <div style="flex: 1; padding: 2rem; background: var(--bg-base); position: relative;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+              <h2>Active Tracks</h2>
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--bg-panel); border: 1px solid var(--border-color);"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Mock Card -->
+              <div class="glass-panel" style="padding: 1rem;">
+                <div style="height: 120px; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                  <i data-lucide="headphones" width="48" style="opacity: 0.5;"></i>
+                </div>
+                <h4 style="margin-bottom: 0.25rem;">Sony WH-1000XM5</h4>
+                <div style="display: flex; justify-content: space-between; color: var(--text-secondary); font-size: 0.85rem;">
+                  <span>$348.00</span>
+                  <span style="color: var(--accent-success);">98 AI Score</span>
+                </div>
+              </div>
+              <div class="glass-panel" style="padding: 1rem;">
+                <div style="height: 120px; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                  <i data-lucide="laptop" width="48" style="opacity: 0.5;"></i>
+                </div>
+                <h4 style="margin-bottom: 0.25rem;">MacBook Air M2</h4>
+                <div style="display: flex; justify-content: space-between; color: var(--text-secondary); font-size: 0.85rem;">
+                  <span>$999.00</span>
+                  <span style="color: #eab308;">65 AI Score</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Mock Alert -->
+            <div class="floating" style="position: absolute; bottom: 2rem; right: -2rem; background: var(--bg-surface); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-glow); display: flex; align-items: center; gap: 1rem;">
+              <i data-lucide="bell-ring" style="color: var(--accent-success);"></i>
+              <div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">Target Reached!</div>
+                <div style="font-weight: 600;">Sony WH-1000XM5 is $299</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Interactive Demo Section -->
+    <section id="demo" class="section container">
+      <div class="text-center fade-up mb-12">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">See It In Action</h2>
+        <p class="text-secondary" style="max-width: 500px; margin: 0 auto;">Experience the power of Trackify AI. Set your target and watch the magic.</p>
+      </div>
+
+      <!-- Interactive Widget -->
+      <div class="glass-panel fade-up mb-12" style="max-width: 900px; margin: 0 auto; padding: 2rem;">
+        <div class="grid" style="grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: center;">
+          
+          <!-- Controls -->
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div>
+              <label style="display: block; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500;">Product URL</label>
+              <div style="display: flex; align-items: center; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.75rem 1rem;">
+                <i data-lucide="link" width="16" style="color: var(--text-muted); margin-right: 0.5rem;"></i>
+                <input type="text" value="https://amazon.in/apple-iphone-15-pro" readonly style="background: transparent; border: none; color: var(--text-primary); font-size: 0.95rem; width: 100%; outline: none; cursor: default;">
+              </div>
+            </div>
+            
+            <div>
+              <label style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500;">
+                <span>Target Price</span>
+                <span id="demo-target-val" style="color: var(--text-primary); font-weight: 700; font-family: 'Outfit';">₹72,000</span>
+              </label>
+              <input type="range" id="demo-slider" min="60000" max="78000" value="72000" step="500" style="width: 100%; height: 6px; background: var(--bg-surface); border-radius: 4px; outline: none; -webkit-appearance: none; accent-color: var(--accent-primary);">
+            </div>
+            
+            <button id="demo-btn" class="btn btn-glow" style="width: 100%; justify-content: center; padding: 1rem; font-size: 1.05rem;" onclick="runInteractiveDemo()">
+              Start Tracking
+            </button>
+          </div>
+
+          <!-- Result Area -->
+          <div id="demo-result-area" style="position: relative; min-height: 280px; background: rgba(0,0,0,0.02); border-radius: var(--radius-md); border: 1px dashed var(--border-color); display: flex; align-items: center; justify-content: center; padding: 1.5rem;">
+            
+            <div id="demo-placeholder" style="text-align: center; color: var(--text-muted);">
+              <div class="glass-panel" style="width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; background: var(--bg-surface);">
+                <i data-lucide="crosshair" width="32" style="color: var(--text-secondary);"></i>
+              </div>
+              <p style="font-size: 0.95rem;">Click 'Start Tracking' to analyze.</p>
+            </div>
+
+            <div id="demo-skeleton" style="display: none; width: 100%; height: 100%; flex-direction: column; gap: 1rem;">
+              <div class="skeleton" style="height: 100px; border-radius: 12px; width: 100%;"></div>
+              <div class="skeleton" style="height: 60px; border-radius: 12px; width: 100%;"></div>
+            </div>
+
+            <div id="demo-product-card" style="display: none; width: 100%; flex-direction: column; gap: 1rem;">
+              <div class="glass-panel" style="padding: 1.5rem; border: 1px solid rgba(0, 102, 255, 0.3); box-shadow: 0 12px 40px rgba(0,102,255,0.1); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;">
+                <!-- Flash background for price drop -->
+                <div id="demo-flash" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(46, 160, 67, 0.2); opacity: 0; pointer-events: none; transition: opacity 0.3s ease;"></div>
+                
+                <div style="display: flex; gap: 1.5rem; align-items: center; position: relative; z-index: 1;">
+                  <div style="width: 70px; height: 70px; background: var(--bg-base); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
+                    <i data-lucide="smartphone" width="40" style="color: var(--text-primary);"></i>
+                  </div>
+                  <div style="flex: 1;">
+                    <h4 style="margin-bottom: 0.25rem; font-size: 1.1rem;">Apple iPhone 15 Pro</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Sold by Amazon Retail</p>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                      <span id="demo-current-price" style="font-size: 1.8rem; font-family: 'Outfit'; font-weight: 700; transition: color 0.3s ease;">₹79,900</span>
+                      <span id="demo-status-badge" class="badge" style="background: rgba(255,255,255,0.1); font-size: 0.75rem;"><i data-lucide="loader" width="12" class="spin"></i> Polling...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="glass-panel" style="padding: 1rem 1.5rem; border-left: 4px solid var(--accent-success); display: flex; justify-content: space-between; align-items: center; animation: fadeUp 0.5s ease backwards;">
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">AI Buy Score</div>
+                  <div style="font-weight: 600; font-size: 1.1rem; margin-top: 0.25rem;">82/100 <span style="font-size: 0.9rem; color: var(--accent-success); font-weight: 500;">(Good Time to Buy)</span></div>
+                </div>
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(46, 160, 67, 0.1); display: flex; align-items: center; justify-content: center;">
+                  <i data-lucide="brain" style="color: var(--accent-success);"></i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center fade-up" style="margin-bottom: 6rem;">
+        <a href="register.html" class="btn btn-primary" style="padding: 1.2rem 3rem; font-size: 1.15rem; border-radius: 999px; display: inline-flex;">
+          Start Tracking Now
+        </a>
+        <p class="text-secondary mt-3" style="font-size: 0.95rem;">Takes less than 10 seconds. No credit card required.</p>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="section container">
+      <div class="text-center fade-up mb-12">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Simple. Intelligent. Fast.</h2>
+        <p class="text-secondary" style="max-width: 500px; margin: 0 auto;">Start saving money in less than 30 seconds.</p>
+      </div>
+      
+      <div class="grid grid-cols-3 gap-8">
+        <div class="glass-panel step-card fade-up">
+          <div class="step-number">1</div>
+          <i data-lucide="link" width="32" style="margin-bottom: 1rem; color: var(--accent-primary);"></i>
+          <h3>Paste Link</h3>
+          <p class="text-secondary mt-2">Find a product you want on Amazon, BestBuy, or 50+ supported stores and paste the URL.</p>
+        </div>
+        <div class="glass-panel step-card fade-up" style="transition-delay: 100ms;">
+          <div class="step-number">2</div>
+          <i data-lucide="target" width="32" style="margin-bottom: 1rem; color: var(--accent-primary);"></i>
+          <h3>Set Target</h3>
+          <p class="text-secondary mt-2">Input the price you want to pay. Our AI will also suggest the historically optimal buy price.</p>
+        </div>
+        <div class="glass-panel step-card fade-up" style="transition-delay: 200ms;">
+          <div class="step-number">3</div>
+          <i data-lucide="bell" width="32" style="margin-bottom: 1rem; color: var(--accent-primary);"></i>
+          <h3>Get Alert</h3>
+          <p class="text-secondary mt-2">Go about your life. We'll ping you via Telegram or Email the exact second the price drops.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section container">
+      <div class="text-center fade-up mb-12">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Everything you need to buy better.</h2>
+      </div>
+
+      <div class="grid grid-cols-3 gap-6">
+        <div class="feature-card fade-up">
+          <div class="feature-icon"><i data-lucide="activity"></i></div>
+          <h4 class="mb-2">Real-time Tracking</h4>
+          <p class="text-secondary" style="font-size: 0.9rem;">Sub-second price polling across thousands of retailers.</p>
+        </div>
+        <div class="feature-card fade-up" style="transition-delay: 100ms;">
+          <div class="feature-icon"><i data-lucide="bell-ring"></i></div>
+          <h4 class="mb-2">Instant Alerts</h4>
+          <p class="text-secondary" style="font-size: 0.9rem;">Webhook, Telegram, Email, and Push notification support.</p>
+        </div>
+        <div class="feature-card fade-up" style="transition-delay: 200ms;">
+          <div class="feature-icon"><i data-lucide="brain"></i></div>
+          <h4 class="mb-2">AI Buy Score</h4>
+          <p class="text-secondary" style="font-size: 0.9rem;">Neural network predicts if a current price is a genuine deal.</p>
+        </div>
+        <div class="feature-card fade-up">
+          <div class="feature-icon"><i data-lucide="bar-chart-2"></i></div>
+          <h4 class="mb-2">History Analytics</h4>
+          <p class="text-secondary" style="font-size: 0.9rem;">Interactive 5-year price history graphs for every product.</p>
+        </div>
+        <div class="feature-card fade-up" style="transition-delay: 100ms;">
+          <div class="feature-icon"><i data-lucide="globe"></i></div>
+          <h4 class="mb-2">Global Comparison</h4>
+          <p class="text-secondary" style="font-size: 0.9rem;">Automatically checks international stores for cheaper imports.</p>
+        </div>
+        <div class="feature-card fade-up" style="transition-delay: 200ms;">
+          <div class="feature-icon"><i data-lucide="heart"></i></div>
+          <h4 class="mb-2">Smart Wishlist</h4>
+          <p class="text-secondary" style="font-size: 0.9rem;">Organize items into folders and share lists with friends.</p>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- FAQ -->
+    <section id="faq" class="section container" style="max-width: 800px;">
+      <div class="text-center fade-up mb-12">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Frequently Asked</h2>
+      </div>
+      
+      <div class="fade-up" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+        <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">How many stores do you support?</h4>
+        <p class="text-secondary">We currently support over 50+ major retailers including Amazon, BestBuy, Walmart, Target, and eBay, with more added weekly.</p>
+      </div>
+      
+      <div class="fade-up" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+        <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">How fast are the alerts?</h4>
+        <p class="text-secondary">Pro users receive sub-second alerts via webhook or Telegram. Free users are batch processed every few hours.</p>
+      </div>
+
+      <div class="fade-up" style="border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+        <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">What is the AI Buy Score?</h4>
+        <p class="text-secondary">Our proprietary model analyzes up to 5 years of pricing history for a specific product and calculates the probability of the current price being the lowest it will hit this season.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fade-up">
+    <div class="container grid grid-cols-4 gap-8 mb-8">
+      <div>
+        <div class="nav-brand mb-4">
+          <i data-lucide="crosshair" class="text-gradient-primary"></i>
+          <span>Trackify<span style="font-weight: 300;">AI</span></span>
+        </div>
+        <p class="text-muted" style="font-size: 0.9rem;">Track Smarter. Buy Better.<br>Designed for premium shoppers.</p>
+      </div>
+      <div>
+        <h4 class="mb-4">Product</h4>
+        <ul style="display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+          <li><a href="#features">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="#">Browser Extension</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="mb-4">Resources</h4>
+        <ul style="display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">API Documentation</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="mb-4">Connect</h4>
+        <div style="display: flex; gap: 1rem; color: var(--text-secondary);">
+          <i data-lucide="twitter"></i>
+          <i data-lucide="github"></i>
+          <i data-lucide="mail"></i>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="border-top: 1px solid var(--border-color); padding-top: 2rem; color: var(--text-muted); font-size: 0.8rem; display: flex; justify-content: space-between;">
+      <span>© 2026 Trackify AI. All rights reserved.</span>
+      <div style="display: flex; gap: 1rem;">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script>lucide.createIcons();</script>
+  <script src="app.js"></script>
+</body>
+</html>

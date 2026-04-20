@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Trackify AI</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-theme="dark">
+
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="mesh-bg"></div>
+
+  <!-- Top Navbar -->
+  <nav class="navbar" style="background: var(--bg-surface); border-bottom: 1px solid var(--border-color);">
+    <div class="nav-brand" style="min-width: 200px;">
+      <i data-lucide="crosshair" class="text-gradient-primary"></i>
+      <span>Trackify<span style="font-weight: 300;">AI</span></span>
+    </div>
+    
+    <div class="search-wrapper" style="flex: 1; max-width: 500px; margin: 0 2rem;">
+      <i data-lucide="search" width="18"></i>
+      <input type="text" class="search-input" placeholder="Search products, brands, or paste URL...">
+    </div>
+
+    <div class="dash-header-controls">
+      <button class="btn btn-glow" style="padding: 0.5rem 1rem;" onclick="showToast('Voice command activated: Listening...', 'mic')">
+        <i data-lucide="mic" width="16"></i>
+      </button>
+      
+      <select class="top-bar-select" style="display: none;">
+        <option>USD ($)</option>
+        <option>INR (₹)</option>
+        <option>AED (د.إ)</option>
+      </select>
+      
+      <select class="top-bar-select">
+        <option>USA</option>
+        <option>India</option>
+        <option>UAE</option>
+      </select>
+
+      <button id="themeToggle" class="theme-toggle">
+        <i data-lucide="sun" width="18"></i>
+      </button>
+      
+      <div class="glass-panel" style="padding: 0.5rem; border-radius: 50%; display: flex; cursor: pointer;" onclick="showToast('New price drop on Sony WH-1000XM5!', 'bell')">
+        <i data-lucide="bell" width="20"></i>
+      </div>
+      <div class="glass-panel" style="padding: 0.5rem; border-radius: 50%; display: flex; cursor: pointer;" onclick="handleLogout()" title="Logout">
+        <i data-lucide="log-out" width="20"></i>
+      </div>
+    </div>
+  </nav>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <a href="dashboard.html" class="btn btn-secondary active" style="justify-content: flex-start; padding: 0.6rem 1rem; border: none; background: rgba(255,255,255,0.05); width: 100%;">
+          <i data-lucide="layout-dashboard" width="18"></i> Dashboard
+        </a>
+        <a href="tracking.html" class="btn btn-secondary" style="justify-content: flex-start; padding: 0.6rem 1rem; border: none; background: transparent; width: 100%;">
+          <i data-lucide="plus-circle" width="18"></i> Track Product
+        </a>
+        <a href="#" class="btn btn-secondary" style="justify-content: flex-start; padding: 0.6rem 1rem; border: none; background: transparent; width: 100%;">
+          <i data-lucide="heart" width="18"></i> Wishlist
+        </a>
+        <a href="#" class="btn btn-secondary" style="justify-content: flex-start; padding: 0.6rem 1rem; border: none; background: transparent; width: 100%;">
+          <i data-lucide="bell-ring" width="18"></i> Alerts
+        </a>
+        <a href="analytics.html" class="btn btn-secondary" style="justify-content: flex-start; padding: 0.6rem 1rem; border: none; background: transparent; width: 100%;">
+          <i data-lucide="bar-chart-2" width="18"></i> Analytics
+        </a>
+        <a href="#" class="btn btn-secondary" style="justify-content: flex-start; padding: 0.6rem 1rem; border: none; background: transparent; width: 100%;">
+          <i data-lucide="settings" width="18"></i> Settings
+        </a>
+      </div>
+      
+      <div style="margin-top: auto; padding-top: 2rem;">
+        <div class="glass-panel" style="padding: 1rem; border: none; background: rgba(94, 106, 210, 0.05);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <h4 style="font-size: 0.9rem;">Pro Plan Active</h4>
+            <i data-lucide="zap" width="14" style="color: var(--accent-primary);"></i>
+          </div>
+          <p class="text-secondary" style="font-size: 0.8rem; margin-bottom: 0.5rem;">12/50 Tracks Used</p>
+          <div style="width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px;">
+            <div style="width: 24%; height: 100%; background: var(--accent-primary); border-radius: 2px;"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+        <div class="fade-up">
+          <h1 class="mb-2">Overview</h1>
+          <p class="text-secondary">Welcome back. Here's your tracking summary.</p>
+        </div>
+        <div class="fade-up" style="display: flex; gap: 1rem;">
+          <button class="btn btn-secondary" onclick="exportCSV()"><i data-lucide="download" width="16"></i> Export CSV</button>
+          <a href="tracking.html" class="btn btn-primary"><i data-lucide="plus" width="16"></i> Quick Add</a>
+        </div>
+      </header>
+
+      <!-- Hero Stats Cards -->
+      <div class="grid grid-cols-4 gap-4 mb-8">
+        <div class="glass-panel feature-card fade-up skeleton" style="padding: 1.5rem;" id="stat1">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: var(--text-secondary);">
+            <span style="font-size: 0.9rem; font-weight: 500;">Products Tracked</span>
+            <i data-lucide="package" width="18"></i>
+          </div>
+          <div class="stat-value" data-target="12" style="font-size: 2rem;">0</div>
+        </div>
+        <div class="glass-panel feature-card fade-up skeleton" style="padding: 1.5rem; transition-delay: 100ms;" id="stat2">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: var(--text-secondary);">
+            <span style="font-size: 0.9rem; font-weight: 500;">Active Alerts</span>
+            <i data-lucide="bell" width="18"></i>
+          </div>
+          <div class="stat-value" data-target="4" style="font-size: 2rem;">0</div>
+        </div>
+        <div class="glass-panel feature-card fade-up skeleton" style="padding: 1.5rem; transition-delay: 200ms;" id="stat3">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: var(--text-secondary);">
+            <span style="font-size: 0.9rem; font-weight: 500;">Money Saved</span>
+            <i data-lucide="dollar-sign" width="18"></i>
+          </div>
+          <div class="stat-value" data-target="840" data-prefix="$" style="font-size: 2rem; color: var(--accent-success); -webkit-text-fill-color: var(--accent-success);">0</div>
+        </div>
+        <div class="glass-panel feature-card fade-up skeleton" style="padding: 1.5rem; transition-delay: 300ms;" id="stat4">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: var(--text-secondary);">
+            <span style="font-size: 0.9rem; font-weight: 500;">Avg AI Accuracy</span>
+            <i data-lucide="brain" width="18"></i>
+          </div>
+          <div class="stat-value" data-target="96" data-suffix="%" style="font-size: 2rem;">0</div>
+        </div>
+      </div>
+
+      <!-- AI Insights Panel -->
+      <h3 class="mb-4 fade-up">AI Insights</h3>
+      <div class="grid grid-cols-3 gap-6 mb-8">
+        <div class="glass-panel ai-insight-card fade-up skeleton" style="border-color: var(--accent-success);" id="ai1">
+          <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase;">Best to buy now</div>
+          <h4 style="margin-bottom: 0.5rem;">Sony WH-1000XM5</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Currently at $299 (historical 12-month low). 98% probability it will not go lower.</p>
+        </div>
+        <div class="glass-panel ai-insight-card fade-up skeleton" style="border-color: #eab308; background: linear-gradient(90deg, rgba(234, 179, 8, 0.05), transparent);" id="ai2">
+          <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase;">Likely to drop</div>
+          <h4 style="margin-bottom: 0.5rem;">MacBook Air M3</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">New models expected next week. Expect a 10-15% price cut within 14 days.</p>
+        </div>
+        <div class="glass-panel ai-insight-card fade-up skeleton" style="border-color: var(--accent-primary);" id="ai3">
+          <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase;">Smart Recommendation</div>
+          <h4 style="margin-bottom: 0.5rem;">Switch to UK Store</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Fujifilm X100VI is currently 12% cheaper on Amazon UK, even factoring in import fees.</p>
+        </div>
+      </div>
+
+      <div class="grid" style="grid-template-columns: 2fr 1fr; gap: 2rem;">
+        
+        <!-- Tracked Products Table (Drag & Drop) -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 class="fade-up">Tracked Products</h3>
+            <div class="fade-up" style="font-size: 0.8rem; color: var(--text-secondary);"><i data-lucide="move" width="14" style="vertical-align: middle;"></i> Drag to reorder</div>
+          </div>
+          
+          <div class="glass-panel fade-up skeleton" style="padding: 0; overflow: hidden;" id="product-table-container">
+            <!-- Headers -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr; padding: 1rem; border-bottom: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">
+              <div>Product</div>
+              <div>Current</div>
+              <div>Target</div>
+              <div>Buy Score</div>
+              <div>Status</div>
+              <div style="text-align: right;">Actions</div>
+            </div>
+            
+            <div id="drag-container">
+              <!-- Item 1 -->
+              <div class="product-row" draggable="true">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <i data-lucide="grip-vertical" width="16" style="color: var(--text-muted); cursor: grab;"></i>
+                  <div class="product-image-sm"><i data-lucide="headphones" width="20" style="opacity: 0.5;"></i></div>
+                  <div style="font-weight: 500; font-size: 0.95rem;">Sony WH-1000XM5</div>
+                </div>
+                <div style="font-weight: 600;">$299</div>
+                <div style="color: var(--text-secondary);">$300</div>
+                <div style="color: var(--accent-success); font-weight: 700; display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="brain" width="14"></i> 98</div>
+                <div><span class="badge badge-success">Buy Now</span></div>
+                <div style="text-align: right; display: flex; gap: 0.5rem; justify-content: flex-end;">
+                  <button class="btn btn-secondary" style="padding: 0.3rem;"><i data-lucide="edit-2" width="14"></i></button>
+                  <button class="btn btn-secondary" style="padding: 0.3rem; color: var(--accent-danger); border-color: rgba(248,81,73,0.2);"><i data-lucide="trash-2" width="14"></i></button>
+                </div>
+              </div>
+              
+              <!-- Item 2 -->
+              <div class="product-row" draggable="true">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <i data-lucide="grip-vertical" width="16" style="color: var(--text-muted); cursor: grab;"></i>
+                  <div class="product-image-sm"><i data-lucide="laptop" width="20" style="opacity: 0.5;"></i></div>
+                  <div style="font-weight: 500; font-size: 0.95rem;">MacBook Air M2</div>
+                </div>
+                <div style="font-weight: 600;">$999</div>
+                <div style="color: var(--text-secondary);">$850</div>
+                <div style="color: #eab308; font-weight: 700; display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="brain" width="14"></i> 65</div>
+                <div><span class="badge" style="background: rgba(255,255,255,0.1); border: 1px solid var(--border-color);">Hold</span></div>
+                <div style="text-align: right; display: flex; gap: 0.5rem; justify-content: flex-end;">
+                  <button class="btn btn-secondary" style="padding: 0.3rem;"><i data-lucide="edit-2" width="14"></i></button>
+                  <button class="btn btn-secondary" style="padding: 0.3rem; color: var(--accent-danger); border-color: rgba(248,81,73,0.2);"><i data-lucide="trash-2" width="14"></i></button>
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="product-row" draggable="true" style="border-bottom: none;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <i data-lucide="grip-vertical" width="16" style="color: var(--text-muted); cursor: grab;"></i>
+                  <div class="product-image-sm"><i data-lucide="camera" width="20" style="opacity: 0.5;"></i></div>
+                  <div style="font-weight: 500; font-size: 0.95rem;">Fujifilm X100VI</div>
+                </div>
+                <div style="font-weight: 600;">$1,599</div>
+                <div style="color: var(--text-secondary);">$1,400</div>
+                <div style="color: var(--accent-danger); font-weight: 700; display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="brain" width="14"></i> 32</div>
+                <div><span class="badge badge-danger">High Price</span></div>
+                <div style="text-align: right; display: flex; gap: 0.5rem; justify-content: flex-end;">
+                  <button class="btn btn-secondary" style="padding: 0.3rem;"><i data-lucide="edit-2" width="14"></i></button>
+                  <button class="btn btn-secondary" style="padding: 0.3rem; color: var(--accent-danger); border-color: rgba(248,81,73,0.2);"><i data-lucide="trash-2" width="14"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="empty-state" class="empty-state">
+            <i data-lucide="package-search" width="64" height="64" style="margin-bottom: 1rem; opacity: 0.5;"></i>
+            <h3>No products tracked yet</h3>
+            <p style="margin-bottom: 1.5rem;">Paste a link in the top bar or use the Quick Add button.</p>
+            <a href="tracking.html" class="btn btn-primary">Track First Product</a>
+          </div>
+        </div>
+
+        <!-- Sidebar Widgets -->
+        <div>
+          <!-- Price Analytics Preview -->
+          <h3 class="mb-4 fade-up">Trend (Sony WH-1000XM5)</h3>
+          <div class="glass-panel fade-up skeleton mb-8" style="padding: 1.5rem; height: 250px; position: relative;" id="chart-panel">
+            <canvas id="priceChart"></canvas>
+          </div>
+
+          <!-- Alerts Center -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 class="fade-up">Recent Alerts</h3>
+            <a href="#" class="fade-up" style="font-size: 0.8rem; color: var(--accent-primary);">View All</a>
+          </div>
+          <div class="glass-panel fade-up skeleton" style="padding: 0 1.5rem;" id="alerts-panel">
+            <div class="alert-feed-item">
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(46, 160, 67, 0.1); display: flex; align-items: center; justify-content: center; color: var(--accent-success); flex-shrink: 0;">
+                <i data-lucide="arrow-down" width="16"></i>
+              </div>
+              <div>
+                <div style="font-size: 0.9rem; font-weight: 500;">Sony WH-1000XM5 hit Target Price!</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Dropped to $299 on Amazon US. Sent via Telegram.</div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">2 mins ago</div>
+              </div>
+            </div>
+            <div class="alert-feed-item">
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(94, 106, 210, 0.1); display: flex; align-items: center; justify-content: center; color: var(--accent-primary); flex-shrink: 0;">
+                <i data-lucide="ticket" width="16"></i>
+              </div>
+              <div>
+                <div style="font-size: 0.9rem; font-weight: 500;">Coupon Found: BESTBUY10</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Auto-applied to MacBook Air M2 tracking.</div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">1 hr ago</div>
+              </div>
+            </div>
+            <div class="alert-feed-item">
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(248, 81, 73, 0.1); display: flex; align-items: center; justify-content: center; color: var(--accent-danger); flex-shrink: 0;">
+                <i data-lucide="shield-alert" width="16"></i>
+              </div>
+              <div>
+                <div style="font-size: 0.9rem; font-weight: 500;">Fake Discount Detected</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Fujifilm X100VI base price was raised by 15% yesterday before "sale".</div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">Yesterday</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="active"><i data-lucide="layout-dashboard" width="20"></i> Home</a>
+    <a href="tracking.html"><i data-lucide="plus-circle" width="20"></i> Track</a>
+    <a href="#"><i data-lucide="bell" width="20"></i> Alerts</a>
+    <a href="analytics.html"><i data-lucide="bar-chart-2" width="20"></i> Stats</a>
+  </nav>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script>lucide.createIcons();</script>
+  <script src="app.js"></script>
+</body>
+</html>

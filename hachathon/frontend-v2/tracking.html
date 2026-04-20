@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Active Tracks - Trackify AI</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .track-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+    .track-list-item:hover {
+      background: var(--bg-panel);
+    }
+    .track-list-item:last-child {
+      border-bottom: none;
+    }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--border-color);
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: var(--accent-success);
+    }
+    input:checked + .slider:before {
+      transform: translateX(18px);
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <nav class="navbar" style="background: var(--bg-surface); border-bottom: 1px solid var(--border-color);">
+    <div class="nav-brand">
+      <i data-lucide="crosshair" class="text-gradient-primary"></i>
+      <span>Trackify<span style="font-weight: 300;">AI</span></span>
+    </div>
+    <div class="search-wrapper">
+      <i data-lucide="search" width="18"></i>
+      <input type="text" class="search-input" placeholder="Search products, brands, or paste URL...">
+    </div>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <button id="themeToggle" class="theme-toggle">
+        <i data-lucide="sun" width="18"></i>
+      </button>
+      <div class="glass-panel" style="padding: 0.5rem; border-radius: 50%; display: flex;">
+        <i data-lucide="bell" width="20"></i>
+      </div>
+      <div class="glass-panel" style="padding: 0.5rem; border-radius: 50%; display: flex; cursor: pointer;" onclick="handleLogout()" title="Logout">
+        <i data-lucide="log-out" width="20"></i>
+      </div>
+    </div>
+  </nav>
+
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <a href="dashboard.html" class="btn btn-secondary" style="justify-content: flex-start; padding: 0.6rem 1rem; border: none; background: transparent; width: 100%;">
+          <i data-lucide="layout-dashboard" width="18"></i> Dashboard
+        </a>
+        <a href="tracking.html" class="btn btn-secondary" style="justify-content: flex-start; padding: 0.6rem 1rem; border: none; background: transparent; width: 100%;">
+          <i data-lucide="target" width="18"></i> Active Tracks
+        </a>
+        <a href="analytics.html" class="btn btn-secondary" style="justify-content: flex-start; padding: 0.6rem 1rem; border: none; background: transparent; width: 100%;">
+          <i data-lucide="bar-chart-2" width="18"></i> Analytics
+        </a>
+        <a href="pricing.html" class="btn btn-secondary" style="justify-content: flex-start; padding: 0.6rem 1rem; border: none; background: transparent; width: 100%;">
+          <i data-lucide="credit-card" width="18"></i> Subscription
+        </a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="fade-up" style="margin-bottom: 2rem;">
+        <h1 class="mb-2">Product Tracking</h1>
+        <p class="text-secondary">Paste a product URL to start tracking its price.</p>
+      </header>
+
+      <div class="fade-up" style="display: flex; gap: 1rem; margin-bottom: 3rem;">
+        <input type="text" id="track-url-input" class="search-input" style="flex: 1; max-width: none;" placeholder="Paste Amazon, BestBuy, or Walmart URL here...">
+        <button class="btn btn-glow" style="border-radius: 999px;" onclick="handleTrackAI()">
+          <i data-lucide="crosshair" width="18"></i> Track AI
+        </button>
+      </div>
+
+      <div class="glass-panel fade-up" style="transition-delay: 100ms;">
+        <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="font-size: 1.2rem;">Currently Tracking</h3>
+          <span class="badge badge-success">12 Items Active</span>
+        </div>
+
+        <div class="track-list">
+          
+          <div class="track-list-item">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <div style="width: 48px; height: 48px; background: rgba(255,255,255,0.02); border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color);">
+                <i data-lucide="headphones" width="24" style="color: var(--text-secondary);"></i>
+              </div>
+              <div>
+                <h4 style="margin-bottom: 0.25rem; font-size: 1.1rem;">Sony WH-1000XM5</h4>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 1rem;">
+                  <span>Current: $338</span>
+                  <span style="color: var(--accent-success); font-weight: 600;">Target: $300</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 2rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="send" width="16" style="color: #0088cc;"></i>
+                <span style="font-size: 0.9rem; color: var(--text-secondary);">Telegram</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <button class="btn btn-secondary" style="padding: 0.5rem; border-radius: 8px; border-color: rgba(248,81,73,0.2); color: var(--accent-danger);">
+                <i data-lucide="trash-2" width="16"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="track-list-item">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <div style="width: 48px; height: 48px; background: rgba(255,255,255,0.02); border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color);">
+                <i data-lucide="laptop" width="24" style="color: var(--text-secondary);"></i>
+              </div>
+              <div>
+                <h4 style="margin-bottom: 0.25rem; font-size: 1.1rem;">MacBook Air M2</h4>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 1rem;">
+                  <span>Current: $999</span>
+                  <span style="color: var(--accent-success); font-weight: 600;">Target: $899</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 2rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="mail" width="16"></i>
+                <span style="font-size: 0.9rem; color: var(--text-secondary);">Email</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <button class="btn btn-secondary" style="padding: 0.5rem; border-radius: 8px; border-color: rgba(248,81,73,0.2); color: var(--accent-danger);">
+                <i data-lucide="trash-2" width="16"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script>lucide.createIcons();</script>
+  <script src="app.js"></script>
+</body>
+</html>

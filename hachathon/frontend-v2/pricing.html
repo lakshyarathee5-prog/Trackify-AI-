@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing - Trackify AI</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-theme="light">
+
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="mesh-bg"></div>
+
+  <nav class="navbar" style="border-bottom: 1px solid var(--border-color);">
+    <div class="nav-brand">
+      <i data-lucide="crosshair" class="text-gradient-primary"></i>
+      <span>Trackify<span style="font-weight: 300;">AI</span></span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="pricing.html" class="active">Pricing</a>
+    </div>
+    <div style="display: flex; gap: 1rem; align-items: center;">
+      <button id="themeToggle" class="theme-toggle">
+        <i data-lucide="sun" width="18"></i>
+      </button>
+      <a href="dashboard.html" class="btn btn-primary" style="padding: 0.5rem 1rem;">Get Started</a>
+    </div>
+  </nav>
+
+  <main style="padding-top: 100px;">
+    <div class="container text-center fade-up mb-12">
+      <div class="hero-pill mb-4" style="margin: 0 auto; display: inline-flex;">Invest in savings</div>
+      <h1 style="font-size: 3rem; margin-bottom: 1rem;">Simple, transparent pricing</h1>
+      <p class="text-secondary" style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">
+        No hidden fees. Just intelligent tracking to save you more money than you spend.
+      </p>
+    </div>
+
+    <div class="container grid grid-cols-3 gap-8" style="max-width: 1100px; margin-bottom: 8rem;">
+      
+      <!-- Free Tier -->
+      <div class="glass-panel feature-card fade-up">
+        <h3 style="font-size: 1.5rem; color: var(--text-secondary);">Starter</h3>
+        <div style="font-family: 'Outfit'; font-size: 3.5rem; font-weight: 800; margin: 1rem 0;">$0<span style="font-size: 1rem; color: var(--text-secondary); font-weight: 400;">/mo</span></div>
+        <p class="text-secondary mb-8">Perfect for casual shoppers tracking a few items.</p>
+        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 2rem;">Get Started Free</button>
+        
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary);">
+            <i data-lucide="check" style="color: var(--accent-success);" width="18"></i>
+            <span>Track up to 5 items</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary);">
+            <i data-lucide="check" style="color: var(--accent-success);" width="18"></i>
+            <span>Email notifications</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary);">
+            <i data-lucide="check" style="color: var(--accent-success);" width="18"></i>
+            <span>24h price updates</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pro Tier -->
+      <div class="glass-panel feature-card fade-up" style="transform: scale(1.05); border-color: var(--accent-primary); box-shadow: var(--shadow-glow); transition-delay: 100ms; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--accent-primary); color: white; padding: 0.25rem 1rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; text-transform: uppercase;">Most Popular</div>
+        
+        <h3 style="font-size: 1.5rem;" class="text-gradient-primary mt-4">Pro AI</h3>
+        <div style="font-family: 'Outfit'; font-size: 3.5rem; font-weight: 800; margin: 1rem 0;">$9<span style="font-size: 1rem; color: var(--text-secondary); font-weight: 400;">/mo</span></div>
+        <p class="text-secondary mb-8">Unlock the full power of Trackify AI engine.</p>
+        <button class="btn btn-glow" style="width: 100%; margin-bottom: 2rem;">Upgrade to Pro</button>
+        
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <i data-lucide="check" style="color: var(--accent-success);" width="18"></i>
+            <span style="font-weight: 500;">Track up to 100 items</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <i data-lucide="check" style="color: var(--accent-success);" width="18"></i>
+            <span style="font-weight: 500;">Live AI Buy Score</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <i data-lucide="check" style="color: var(--accent-success);" width="18"></i>
+            <span style="font-weight: 500;">Sub-second Telegram Alerts</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <i data-lucide="check" style="color: var(--accent-success);" width="18"></i>
+            <span style="font-weight: 500;">Global price scraping</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enterprise Tier -->
+      <div class="glass-panel feature-card fade-up" style="transition-delay: 200ms;">
+        <h3 style="font-size: 1.5rem; color: var(--text-secondary);">Unlimited</h3>
+        <div style="font-family: 'Outfit'; font-size: 3.5rem; font-weight: 800; margin: 1rem 0;">$29<span style="font-size: 1rem; color: var(--text-secondary); font-weight: 400;">/mo</span></div>
+        <p class="text-secondary mb-8">For extreme deal hunters and resellers.</p>
+        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 2rem;">Choose Unlimited</button>
+        
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary);">
+            <i data-lucide="check" style="color: var(--accent-success);" width="18"></i>
+            <span>Unlimited tracking</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary);">
+            <i data-lucide="check" style="color: var(--accent-success);" width="18"></i>
+            <span>API Access</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary);">
+            <i data-lucide="check" style="color: var(--accent-success);" width="18"></i>
+            <span>Reseller analytics</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
